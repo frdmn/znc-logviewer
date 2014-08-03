@@ -30,7 +30,14 @@ var files = fs.readdirSync(settings.zncpath + '/users/' + testuser + '/moddata/l
 files.forEach(function(filename){
     var filenameElements = filename.split("_");
     networkArray.push(filenameElements[0]);
-    channelArray.push(filenameElements[1]);
+
+    // Remove non-channels (queries) from channel list
+    var channelPattern = new RegExp(/^#.*$/);
+    var channelMatches = filenameElements[1].match(channelPattern);
+    if (channelMatches) {
+        channelArray.push(channelMatches[0]);
+    };
+
     dateArray.push(filenameElements[2]);
 });
 
@@ -45,7 +52,7 @@ if(networkIndex!=-1){
    networkArray.splice(networkIndex, 1);
 }
 
-console.log(networkArray);
+// console.log(networkArray);
 // console.log(channelArray);
 // console.log(dateArray);
 
