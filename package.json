@@ -1,6 +1,7 @@
 {
   "name": "znc-logviewer",
   "version": "0.0.1",
+  "description": "Node based web interface to browse through ZNC log files",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -13,6 +14,19 @@
     "debug": "~0.7.4"
   },
   "devDependencies": {
-    "express3-handlebars": "~0.5.0"
+    "express3-handlebars": "~0.5.0",
+    "grunt": "~0.4.2",
+    "grunt-contrib-sass": "~0.7.2",
+    "load-grunt-tasks": "~0.3.0",
+    "grunt-autoprefixer": "~0.6.5",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-connect": "~0.6.0",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-imagemin": "~0.4.1",
+    "grunt-htmlhint": "~0.4.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-notify": "~0.3.0"
   }
 }
