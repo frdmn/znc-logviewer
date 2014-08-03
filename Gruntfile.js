@@ -129,7 +129,7 @@ module.exports = function(grunt) {
             },
             sass: {
                 files: ['<%= dirs.css %>/*.scss'],
-                tasks: ['sass:dev', 'autoprefixer', 'nodemon']
+                tasks: ['sass:dev', 'autoprefixer']
             },
             images: {
                 files: ['<%= dirs.images %>/*.{png,jpg,gif}'],
@@ -154,5 +154,5 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['copy', 'sass:build', 'autoprefixer', 'concat', 'uglify', 'imagemin']);
-    grunt.registerTask('dev', ['copy', 'nodemon', 'watch']);
+    grunt.registerTask('dev', ['copy', 'watch']);
 };
