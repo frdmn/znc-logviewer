@@ -7,11 +7,8 @@ node_modules
 bower_components
 
 # Assets and files that we're actually compile
-public/assets/fonts
-public/assets/svg
-public/assets/css/style.css
-public/assets/js/build.js
-public/assets/js/modernizr.js
-
-# Settings file
-settings.json
+public/fonts
+public/svg
+public/css/style.css
+public/js/build.js
+public/js/modernizr.js
