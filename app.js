@@ -1,3 +1,4 @@
+// Require modules
 var express = require('express')
     ,path = require('path')
     ,favicon = require('static-favicon')
@@ -6,22 +7,31 @@ var express = require('express')
     ,bodyParser = require('body-parser')
     ,handlebars  = require('express3-handlebars');
 
+// Require our routes
 var routeIndex = require('./routes/index')
     ,routeAbout = require('./routes/about');
 
+// Load settings file
+var settings = require('./settings.json');
+
+/* Express setup */
+
+// Init
 var app = express();
 
-// view engine setup
+// View setup
 // app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-app.use(favicon());
+// Middleware setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+/* Routes */
 
 app.use('/', routeIndex);
 app.use('/about', routeAbout);
@@ -33,7 +43,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-/// error handlers
+/* error handlers */
 
 // development error handler
 // will print stacktrace
@@ -56,6 +66,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
