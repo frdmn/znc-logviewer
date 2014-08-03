@@ -19,7 +19,24 @@ var settings = require('./settings.json');
 
 // Set a temporary test user, to read logs from
 var testuser = "frdmn";
+
+//  
+var networkList = [],
+    channelList = [],
+    dateList = [];
+
 var files = fs.readdirSync(settings.zncpath + '/users/' + testuser + '/moddata/log/');
+
+files.forEach(function(filename){
+    var filenameElements = filename.split("_");
+    networkList.push(filenameElements[0]);
+    channelList.push(filenameElements[1]);
+    dateList.push(filenameElements[2]);
+});
+console.log(networkList);
+// console.log(channelList);
+// console.log(dateList);
+
 /* Express setup */
 
 // Init
