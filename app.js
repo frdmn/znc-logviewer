@@ -33,6 +33,11 @@ files.forEach(function(filename){
     channelList.push(filenameElements[1]);
     dateList.push(filenameElements[2]);
 });
+
+// Make arrays unique
+networkList = uniquify(networkList);
+channelList = uniquify(channelList);
+dateList = uniquify(dateList);
 console.log(networkList);
 // console.log(channelList);
 // console.log(dateList);
@@ -91,3 +96,11 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+// Function to remove duplicate elements from array
+function uniquify(array){
+    array = array.filter(function(elem, pos) {
+        return array.indexOf(elem) == pos;
+    });
+    return(array);
+}
