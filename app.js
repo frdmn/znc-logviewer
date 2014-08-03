@@ -20,34 +20,34 @@ var settings = require('./settings.json');
 // Set a temporary test user, to read logs from
 var testuser = "frdmn";
 
-//  
-var networkList = [],
-    channelList = [],
-    dateList = [];
+// Init element array
+var networkArray = [],
+    channelArray = [],
+    dateArray = [];
 
 var files = fs.readdirSync(settings.zncpath + '/users/' + testuser + '/moddata/log/');
 
 files.forEach(function(filename){
     var filenameElements = filename.split("_");
-    networkList.push(filenameElements[0]);
-    channelList.push(filenameElements[1]);
-    dateList.push(filenameElements[2]);
+    networkArray.push(filenameElements[0]);
+    channelArray.push(filenameElements[1]);
+    dateArray.push(filenameElements[2]);
 });
 
 // Make arrays unique
-networkList = uniquify(networkList);
-channelList = uniquify(channelList);
-dateList = uniquify(dateList);
+networkArray = uniquify(networkArray);
+channelArray = uniquify(channelArray);
+dateArray = uniquify(dateArray);
 
-// Remove "znc" element from networkList, to exclude ZNC status logs
-var networkIndex = networkList.indexOf('znc');
+// Remove "znc" element from networkArray, to exclude ZNC status logs
+var networkIndex = networkArray.indexOf('znc');
 if(networkIndex!=-1){
-   networkList.splice(networkIndex, 1);
+   networkArray.splice(networkIndex, 1);
 }
 
-console.log(networkList);
-// console.log(channelList);
-// console.log(dateList);
+console.log(networkArray);
+// console.log(channelArray);
+// console.log(dateArray);
 
 /* Express setup */
 
