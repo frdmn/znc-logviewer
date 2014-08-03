@@ -117,9 +117,9 @@ module.exports = function(grunt) {
 
         // Nodemon
         nodemon: {
-          dev: {
-            script: 'app.js'
-          }
+            dev: {
+                script: 'bin/www'
+            }
         },
 
         // Watch
@@ -128,7 +128,7 @@ module.exports = function(grunt) {
                 livereload: true
             },
             sass: {
-                files: ['<%= dirs.css %>/*.scss', 'app.js'],
+                files: ['<%= dirs.css %>/*.scss'],
                 tasks: ['sass:dev', 'autoprefixer', 'nodemon']
             },
             images: {
@@ -145,10 +145,14 @@ module.exports = function(grunt) {
                 options: {
                     spawn: false
                 }
+            },
+            node: {
+                files: ['app.js', 'routes/*.js'],
+                tasks: ['nodemon'],
             }
         }
     });
 
-    grunt.registerTask('default', ['copy', 'sass:build', 'autoprefixer', 'concat', 'uglify', 'imagemin', 'nodemon']);
-    grunt.registerTask('dev', ['copy', 'watch']);
+    grunt.registerTask('default', ['copy', 'sass:build', 'autoprefixer', 'concat', 'uglify', 'imagemin']);
+    grunt.registerTask('dev', ['copy', 'nodemon', 'watch']);
 };
