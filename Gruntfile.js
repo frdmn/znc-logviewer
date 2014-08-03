@@ -114,14 +114,7 @@ module.exports = function(grunt) {
             ]
           }
         },
-
-        // Nodemon
-        nodemon: {
-            dev: {
-                script: 'bin/www'
-            }
-        },
-
+        
         // Watch
         watch: {
             options: {
