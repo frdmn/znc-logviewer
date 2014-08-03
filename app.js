@@ -5,7 +5,8 @@ var express = require('express')
     ,logger = require('morgan')
     ,cookieParser = require('cookie-parser')
     ,bodyParser = require('body-parser')
-    ,handlebars  = require('express3-handlebars');
+    ,handlebars  = require('express3-handlebars')
+    ,fs = require('fs');
 
 // Require our routes
 var routeIndex = require('./routes/index')
@@ -14,6 +15,11 @@ var routeIndex = require('./routes/index')
 // Load settings file
 var settings = require('./settings.json');
 
+/* Parse informations from log file names */
+
+// Set a temporary test user, to read logs from
+var testuser = "frdmn";
+var files = fs.readdirSync(settings.zncpath + '/users/' + testuser + '/moddata/log/');
 /* Express setup */
 
 // Init
