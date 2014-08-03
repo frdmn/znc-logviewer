@@ -38,6 +38,13 @@ files.forEach(function(filename){
 networkList = uniquify(networkList);
 channelList = uniquify(channelList);
 dateList = uniquify(dateList);
+
+// Remove "znc" element from networkList, to exclude ZNC status logs
+var networkIndex = networkList.indexOf('znc');
+if(networkIndex!=-1){
+   networkList.splice(networkIndex, 1);
+}
+
 console.log(networkList);
 // console.log(channelList);
 // console.log(dateList);
