@@ -145,10 +145,6 @@ module.exports = function(grunt) {
                 options: {
                     spawn: false
                 }
-            },
-            node: {
-                files: ['app.js', 'routes/*.js'],
-                tasks: ['nodemon'],
             }
         }
     });
