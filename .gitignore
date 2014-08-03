@@ -15,3 +15,6 @@ public/js/modernizr.js
 
 # Misc
 opt
+
+# Settings file
+settings.json
