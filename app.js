@@ -52,9 +52,8 @@ if(networkIndex!=-1){
    networkArray.splice(networkIndex, 1);
 }
 
-// console.log(networkArray);
-// console.log(channelArray);
-// console.log(dateArray);
+// Display found elements
+console.log('Found ' + networkArray.length + ' networks, ' + channelArray.length + ' channels and ' + dateArray.length + ' possible dates');
 
 /* Express setup */
 
