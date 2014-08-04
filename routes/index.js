@@ -36,6 +36,11 @@ networkArray = uniquify(networkArray);
 channelArray = uniquify(channelArray);
 dateArray = uniquify(dateArray);
 
+arrayObject = {};
+arrayObject.networkArray = networkArray;
+arrayObject.channelArray = channelArray;
+arrayObject.dateArray = dateArray;
+
 // Remove "znc" element from networkArray, to exclude ZNC status logs
 var networkIndex = networkArray.indexOf('znc');
 if(networkIndex!=-1){
@@ -49,7 +54,8 @@ console.log('Found ' + networkArray.length + ' networks, ' + channelArray.length
 router.get('/', function(req, res) {
     res.render('index', { 
         title: 'Index',
-        active_index: true
+        active_index: true,
+        arrayObject: arrayObject
     });
 });
 
