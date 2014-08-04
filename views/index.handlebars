@@ -2,7 +2,8 @@
     <h1>Bootstrap starter template</h1>
     <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
 
-    {{#each arrayObject.networkArray}}
+<!--
+     {{#each arrayObject.networkArray}}
         <p>Network: {{this}}</p>
     {{/each}}
     {{#each arrayObject.channelArray}}
@@ -10,5 +11,20 @@
     {{/each}}
     {{#each arrayObject.dateArray}}
         <p>Date: {{this}}</p>
-    {{/each}}
+    {{/each}} 
+-->
 </div>
+<label>Pick a time: <input id="input"></label>
+<script>
+$(document).ready(function(){
+    var input = $('#input')[0];
+    rome(input, {
+        time: false,
+        dateValidator: rome.val.only([
+            {{#each arrayObject.dateArray}}
+                '{{this}}',
+            {{/each}}
+        ])
+    });
+});
+</script>
