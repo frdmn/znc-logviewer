@@ -30,9 +30,15 @@ files.forEach(function(filename){
         var channelMatches = splitMatch[2].match(/^#.*$/);
         if (channelMatches) {
             channelArray.push(channelMatches[0]);
-        };
+        }
 
-        dateArray.push(splitMatch[3]);
+        // Turn into correct format for datepicker
+        var dateRegex = /^([0-9]{4})([0-9]{2})([0-9]{2})$/g,
+            dateMatch = dateRegex.exec(splitMatch[3]);
+        if (dateMatch) {
+            var newDate = dateMatch[1] + '-' + dateMatch[2] + '-' + dateMatch[3];
+            dateArray.push(newDate);
+        }
     } 
 });
 
