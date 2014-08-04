@@ -18,17 +18,22 @@ var networkArray = [],
 var files = fs.readdirSync(settings.zncpath + '/users/' + testuser + '/moddata/log/');
 
 files.forEach(function(filename){
-    var filenameElements = filename.split("_");
-    networkArray.push(filenameElements[0]);
+    // Split filenames based on a pattern like <network>_<channel>_<date>
+    var splitRegex = /^([a-z]*)_(.*)_([0-9]*).log$/g,
+        splitMatch = splitRegex.exec(filename);
 
-    // Remove non-channels (queries) from channel list
-    var channelPattern = new RegExp(/^#.*$/);
-    var channelMatches = filenameElements[1].match(channelPattern);
-    if (channelMatches) {
-        channelArray.push(channelMatches[0]);
-    };
+    // If we have a match, proceed to add to arrays
+    if (splitMatch) {
+        networkArray.push(splitMatch[1]);
 
-    dateArray.push(filenameElements[2]);
+        // Remove non-channels (queries) from channel list
+        var channelMatches = splitMatch[2].match(/^#.*$/);
+        if (channelMatches) {
+            channelArray.push(channelMatches[0]);
+        };
+
+        dateArray.push(splitMatch[3]);
+    } 
 });
 
 // Make arrays unique
@@ -36,6 +41,7 @@ networkArray = uniquify(networkArray);
 channelArray = uniquify(channelArray);
 dateArray = uniquify(dateArray);
 
+// Create object which gets passed to the template
 arrayObject = {};
 arrayObject.networkArray = networkArray;
 arrayObject.channelArray = channelArray;
