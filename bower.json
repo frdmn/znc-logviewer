@@ -17,6 +17,7 @@
   "dependencies": {
     "jquery": "1.11",
     "modernizr": "~2.8.3",
-    "bootstrap-sass-official": "~3.2.0"
+    "bootstrap-sass-official": "~3.2.0",
+    "rome": "~1.0.0"
   }
 }
