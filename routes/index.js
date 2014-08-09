@@ -7,19 +7,15 @@ var settings = require('../settings.json');
     
 /* Parse informations from log file names */
 
-// Set a temporary test user, to read logs from
-var testuser = "frdmn",
-    testnetwork = "espernet";
-
 // Init element array
 var channelArray = [],
     dateArray = [];
 
-var files = fs.readdirSync(settings.zncpath + '/users/' + testuser + '/moddata/log/');
+var files = fs.readdirSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/');
 
 files.forEach(function(filename){
     // Split filenames based on a pattern like <network>_<channel>_<date>
-    var splitPattern = '^' + testnetwork + '_(.*)_([0-9]*).log$',
+    var splitPattern = '^' + settings.network + '_(.*)_([0-9]*).log$',
         splitRegex = new RegExp(splitPattern, 'g'),
         splitMatch = splitRegex.exec(filename);
 
