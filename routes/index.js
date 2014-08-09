@@ -61,8 +61,8 @@ router.get('/:channel', function(req, res) {
 
     files.forEach(function(filename){
         // Split filenames based on a pattern like <network>_<channel>_<date>
-        var splitPattern = '^' + settings.network + '_#'+ req.param('channel') + '_([0-9]*).log$',
-            splitRegex = new RegExp(splitPattern, 'g'),
+        var splitPattern = '^' + settings.network + '_#'+ req.params.channel + '_([0-9]*).log$';
+        var splitRegex = new RegExp(splitPattern, 'g'),
             splitMatch = splitRegex.exec(filename);
 
         // If we have a match, proceed to add to arrays
@@ -93,7 +93,7 @@ router.get('/:channel', function(req, res) {
     res.render('channel', { 
         title: 'Channel: ' + req.param('channel'),
         active_index: true,
-        channel: req.param('channel')
+        channel: req.params.channel,
     });
 });
 
