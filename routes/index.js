@@ -11,8 +11,7 @@ var settings = require('../settings.json');
 var testuser = "frdmn";
 
 // Init element array
-var networkArray = [],
-    channelArray = [],
+var channelArray = [],
     dateArray = [];
 
 var files = fs.readdirSync(settings.zncpath + '/users/' + testuser + '/moddata/log/');
@@ -24,8 +23,6 @@ files.forEach(function(filename){
 
     // If we have a match, proceed to add to arrays
     if (splitMatch) {
-        networkArray.push(splitMatch[1]);
-
         // Remove non-channels (queries) from channel list
         var channelMatches = splitMatch[2].match(/^#.*$/);
         if (channelMatches) {
@@ -43,24 +40,16 @@ files.forEach(function(filename){
 });
 
 // Make arrays unique
-networkArray = uniquify(networkArray);
 channelArray = uniquify(channelArray);
 dateArray = uniquify(dateArray);
 
 // Create object which gets passed to the template
 arrayObject = {};
-arrayObject.networkArray = networkArray;
 arrayObject.channelArray = channelArray;
 arrayObject.dateArray = dateArray;
 
-// Remove "znc" element from networkArray, to exclude ZNC status logs
-var networkIndex = networkArray.indexOf('znc');
-if(networkIndex!=-1){
-   networkArray.splice(networkIndex, 1);
-}
-
 // Display found elements
-console.log('Found ' + networkArray.length + ' networks, ' + channelArray.length + ' channels and ' + dateArray.length + ' possible dates');
+console.log('Found ' + channelArray.length + ' channels and ' + dateArray.length + ' possible dates');
 
 /* GET home page. */
 router.get('/', function(req, res) {
