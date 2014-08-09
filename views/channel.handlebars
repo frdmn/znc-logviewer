@@ -1,0 +1,14 @@
+<h1>#{{{channel}}}</h1><label>Pick a time: <input id="input" data-network="{{arrayObject.network}}" data-user="{{arrayObject.user}}"></label>
+<script>
+$(document).ready(function(){
+    var input = $('#input')[0];
+    rome(input, {
+        time: false,
+        dateValidator: rome.val.only([
+            {{#each arrayObject.dateArray}}
+                '{{this}}',
+            {{/each}}
+        ])
+    });
+});
+</script>
