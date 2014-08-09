@@ -50,7 +50,8 @@ router.get('/', function(req, res) {
 });
 
 /* GET home page. */
-router.get('/:channel', function(req, res) {
+router.get('/channel/:channel', function(req, res) {
+
 
     /* Parse possible dates */
 
