@@ -94,6 +94,7 @@ router.get('/:channel', function(req, res) {
         title: 'Channel: ' + req.param('channel'),
         active_index: true,
         channel: req.params.channel,
+        arrayObject: arrayObject
     });
 });
 
