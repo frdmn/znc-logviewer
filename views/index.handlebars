@@ -6,7 +6,7 @@
         <p>Date: {{this}}</p>
     {{/each}} 
 -->
-<label>Pick a time: <input id="input"></label>
+<label>Pick a time: <input id="input" data-network="{{arrayObject.network}}" data-user="{{arrayObject.user}}"></label>
 <script>
 $(document).ready(function(){
     var input = $('#input')[0];

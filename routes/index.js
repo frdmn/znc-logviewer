@@ -19,8 +19,6 @@ files.forEach(function(filename){
         splitRegex = new RegExp(splitPattern, 'g'),
         splitMatch = splitRegex.exec(filename);
 
-    console.log(splitMatch);
-
     // If we have a match, proceed to add to arrays
     if (splitMatch) {
         // Remove non-channels (queries) from channel list
@@ -45,6 +43,8 @@ dateArray = uniquify(dateArray);
 
 // Create object which gets passed to the template
 arrayObject = {};
+arrayObject.network = settings.network;
+arrayObject.user = settings.user;
 arrayObject.channelArray = channelArray;
 arrayObject.dateArray = dateArray;
 
