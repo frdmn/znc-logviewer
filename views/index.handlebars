@@ -1,14 +1,14 @@
-<label>Pick a time: <input id="input" data-network="{{arrayObject.network}}" data-user="{{arrayObject.user}}"></label>
+<p>Please select a channel in the drop down menu:</p>
+<select>
+    {{#each arrayObject.channelArray}}
+        <option value="{{this}}">{{this}}</option>
+    {{/each}}
+</select>
 <script>
 $(document).ready(function(){
-    var input = $('#input')[0];
-    rome(input, {
-        time: false,
-        dateValidator: rome.val.only([
-            {{#each arrayObject.dateArray}}
-                '{{this}}',
-            {{/each}}
-        ])
-    });
+    $("select").change(function(){
+        var channel = $(this).val(); 
+        window.location = '/' + channel;
+    });    
 });
 </script>
