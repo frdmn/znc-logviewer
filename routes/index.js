@@ -24,7 +24,7 @@ files.forEach(function(filename){
         // Remove non-channels (queries) from channel list
         var channelMatches = splitMatch[1].match(/^#.*$/);
         if (channelMatches) {
-            channelArray.push(channelMatches[0]);
+            channelArray.push(channelMatches[0].substring(1));
         }
 
         // Turn into correct format for datepicker
