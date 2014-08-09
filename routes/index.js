@@ -8,7 +8,8 @@ var settings = require('../settings.json');
 /* Parse informations from log file names */
 
 // Set a temporary test user, to read logs from
-var testuser = "frdmn";
+var testuser = "frdmn",
+    testnetwork = "espernet";
 
 // Init element array
 var channelArray = [],
@@ -18,20 +19,23 @@ var files = fs.readdirSync(settings.zncpath + '/users/' + testuser + '/moddata/l
 
 files.forEach(function(filename){
     // Split filenames based on a pattern like <network>_<channel>_<date>
-    var splitRegex = /^([a-z]*)_(.*)_([0-9]*).log$/g,
+    var splitPattern = '^' + testnetwork + '_(.*)_([0-9]*).log$',
+        splitRegex = new RegExp(splitPattern, 'g'),
         splitMatch = splitRegex.exec(filename);
+
+    console.log(splitMatch);
 
     // If we have a match, proceed to add to arrays
     if (splitMatch) {
         // Remove non-channels (queries) from channel list
-        var channelMatches = splitMatch[2].match(/^#.*$/);
+        var channelMatches = splitMatch[1].match(/^#.*$/);
         if (channelMatches) {
             channelArray.push(channelMatches[0]);
         }
 
         // Turn into correct format for datepicker
         var dateRegex = /^([0-9]{4})([0-9]{2})([0-9]{2})$/g,
-            dateMatch = dateRegex.exec(splitMatch[3]);
+            dateMatch = dateRegex.exec(splitMatch[2]);
         if (dateMatch) {
             var newDate = dateMatch[1] + '-' + dateMatch[2] + '-' + dateMatch[3];
             dateArray.push(newDate);
