@@ -49,6 +49,54 @@ router.get('/', function(req, res) {
     });
 });
 
+/* GET home page. */
+router.get('/:channel', function(req, res) {
+
+    /* Parse possible dates */
+
+    // Init element array
+    var dateArray = [];
+
+    var files = fs.readdirSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/');
+
+    files.forEach(function(filename){
+        // Split filenames based on a pattern like <network>_<channel>_<date>
+        var splitPattern = '^' + settings.network + '_#'+ req.param('channel') + '_([0-9]*).log$',
+            splitRegex = new RegExp(splitPattern, 'g'),
+            splitMatch = splitRegex.exec(filename);
+
+        // If we have a match, proceed to add to arrays
+        if (splitMatch) {
+            // Turn into correct format for datepicker
+            var dateRegex = /^([0-9]{4})([0-9]{2})([0-9]{2})$/g,
+                dateMatch = dateRegex.exec(splitMatch[1]);
+            if (dateMatch) {
+                var newDate = dateMatch[1] + '-' + dateMatch[2] + '-' + dateMatch[3];
+                dateArray.push(newDate);
+            }
+        } 
+    });
+
+    // Make arrays unique
+    dateArray = uniquify(dateArray);
+
+    // Create object which gets passed to the template
+    arrayObject = {};
+    arrayObject.network = settings.network;
+    arrayObject.user = settings.user;
+    arrayObject.channel = req.param('channel');
+    arrayObject.dateArray = dateArray;
+
+    // Display found elements
+    console.log('Found ' + dateArray.length + ' possible dates');
+
+    res.render('channel', { 
+        title: 'Channel: ' + req.param('channel'),
+        active_index: true,
+        channel: req.param('channel')
+    });
+});
+
 // Function to remove duplicate elements from array
 function uniquify(array){
     array = array.filter(function(elem, pos) {
