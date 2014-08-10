@@ -14,7 +14,7 @@ $(document).ready(function(){
     }).on('data', function (value) {
         // Some action when date is selected
         //console.log($(input).attr('data-user') + '_' + $(input).attr('data-network') + '_#' + $(input).attr('data-channel') + '_' + value.replace(/-/g, '') + '.txt');
-        window.location = '/channel/' + $(input).attr('data-channel') + '/' + value.replace(/-/g, '');
+        window.location = '/c/' + $(input).attr('data-channel') + '/' + value.replace(/-/g, '');
     });
 });
 </script>

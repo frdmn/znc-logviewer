@@ -49,8 +49,8 @@ router.get('/', function(req, res) {
     });
 });
 
-/* GET /channel/:channel . */
-router.get('/channel/:channel', function(req, res) {
+/* GET /c/:channel . */
+router.get('/c/:channel', function(req, res) {
     /* Parse possible dates */
 
     // Init temporary date array
@@ -79,8 +79,8 @@ router.get('/channel/:channel', function(req, res) {
     });
 });
 
-/* GET /channel/:channel/:date . */
-router.get('/channel/:channel/:date', function(req, res) {
+/* GET /c/:channel/:date . */
+router.get('/c/:channel/:date', function(req, res) {
     /* Read actual logfile to render */
 
     var array = fs.readFileSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/' + settings.network + '_#' + req.params.channel + '_' + req.params.date + '.log').toString().split("\n"),
