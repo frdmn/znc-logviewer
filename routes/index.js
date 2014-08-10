@@ -28,9 +28,6 @@ router.get('/', function(req, res) {
         channelArray.push(channel);
     }
 
-    // Make array unique
-    channelArray = uniquify(channelArray);
-
     // Create object which gets passed to the template
     arrayObject = {};
     arrayObject.network = settings.network;
@@ -58,9 +55,6 @@ router.get('/channel/:channel', function(req, res) {
     for (var date in channelObject[req.params.channel]) {
         dateArray.push(channelObject[req.params.channel][date]);
     }
-
-    // Make arrays unique
-    dateArray = uniquify(dateArray);
 
     // Create object which gets passed to the template
     arrayObject = {};
@@ -101,14 +95,6 @@ router.get('/channel/:channel/:date', function(req, res) {
         messages: messageObject
     });
 });
-
-// Function to remove duplicate elements from array
-function uniquify(array){
-    array = array.filter(function(elem, pos) {
-        return array.indexOf(elem) == pos;
-    });
-    return(array);
-}
 
 // Function to update the logfiles
 function updateLogfiles(){
@@ -159,6 +145,6 @@ function updateLogfiles(){
     }
 
     return channelObject;
-};
+}
 
 module.exports = router;
