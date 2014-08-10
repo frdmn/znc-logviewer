@@ -2,17 +2,17 @@
 <script>
 $(document).ready(function(){
     var input = $('#input')[0];
-    rome(input, {
+
+    rome(input, { 
         time: false,
         dateValidator: rome.val.only([
+            // Add each possible date
             {{#each arrayObject.dateArray}}
                 {{#if @last}} '{{this}}' {{else}} '{{this}}', {{/if}}
             {{/each}}
-        ])
-    });
-
-    // Some action when date is selected
-    rome(input).on('data', function (value) {
+        ]) 
+    }).on('data', function (value) {
+        // Some action when date is selected
         console.log($(input).attr('data-channel'), value);
     });
 });
