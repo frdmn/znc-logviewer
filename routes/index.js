@@ -49,10 +49,8 @@ router.get('/', function(req, res) {
     });
 });
 
-/* GET home page. */
+/* GET /channel/:channel . */
 router.get('/channel/:channel', function(req, res) {
-
-
     /* Parse possible dates */
 
     // Init element array
