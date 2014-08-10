@@ -6,7 +6,7 @@ $(document).ready(function(){
         time: false,
         dateValidator: rome.val.only([
             {{#each arrayObject.dateArray}}
-                '{{this}}',
+                {{#if @last}} '{{this}}' {{else}} '{{this}}', {{/if}}
             {{/each}}
         ])
     });
