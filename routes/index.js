@@ -53,28 +53,13 @@ router.get('/', function(req, res) {
 router.get('/channel/:channel', function(req, res) {
     /* Parse possible dates */
 
-    // Init element array
+    // Init temporary date array
     var dateArray = [];
 
-    var files = fs.readdirSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/');
-
-    files.forEach(function(filename){
-        // Split filenames based on a pattern like <network>_<channel>_<date>
-        var splitPattern = '^' + settings.network + '_#'+ req.params.channel + '_([0-9]*).log$';
-        var splitRegex = new RegExp(splitPattern, 'g'),
-            splitMatch = splitRegex.exec(filename);
-
-        // If we have a match, proceed to add to arrays
-        if (splitMatch) {
-            // Turn into correct format for datepicker
-            var dateRegex = /^([0-9]{4})([0-9]{2})([0-9]{2})$/g,
-                dateMatch = dateRegex.exec(splitMatch[1]);
-            if (dateMatch) {
-                var newDate = dateMatch[1] + '-' + dateMatch[2] + '-' + dateMatch[3];
-                dateArray.push(newDate);
-            }
-        } 
-    });
+    // For each date, push to array
+    for (var date in channelObject[req.param('channel')]) {
+        dateArray.push(channelObject[req.param('channel')][date]);
+    }
 
     // Make arrays unique
     dateArray = uniquify(dateArray);
