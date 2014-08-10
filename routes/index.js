@@ -55,8 +55,8 @@ router.get('/channel/:channel', function(req, res) {
     var dateArray = [];
 
     // For each date, push to array
-    for (var date in channelObject[req.param('channel')]) {
-        dateArray.push(channelObject[req.param('channel')][date]);
+    for (var date in channelObject[req.params.channel]) {
+        dateArray.push(channelObject[req.params.channel][date]);
     }
 
     // Make arrays unique
@@ -66,14 +66,14 @@ router.get('/channel/:channel', function(req, res) {
     arrayObject = {};
     arrayObject.network = settings.network;
     arrayObject.user = settings.user;
-    arrayObject.channel = req.param('channel');
+    arrayObject.channel = req.params.channel;
     arrayObject.dateArray = dateArray;
 
     // Display found elements
     console.log('Found ' + dateArray.length + ' possible dates');
 
     res.render('dateselect', { 
-        title: 'Channel: ' + req.param('channel'),
+        title: 'Channel: ' + req.params.channel,
         active_index: true,
         channel: req.params.channel,
         arrayObject: arrayObject
@@ -94,7 +94,7 @@ router.get('/channel/:channel/:date', function(req, res) {
     }
 
     res.render('channel', { 
-        title: 'Channel: ' + req.param('channel') + ' - ' + req.param('date'),
+        title: 'Channel: ' + req.params.channel + ' - ' + req.params.date,
         active_index: true,
         channel: req.params.channel,
         date: req.params.date,
