@@ -50,7 +50,7 @@ router.get('/', function(req, res) {
 });
 
 /* GET /c/:channel . */
-router.get('/c/:channel', function(req, res) {
+router.get('/c/:channel/:date?', function(req, res) {
     /* Parse possible dates */
 
     // Init temporary channel array
@@ -80,33 +80,33 @@ router.get('/c/:channel', function(req, res) {
     // Display found elements
     console.log('Found ' + dateArray.length + ' possible dates');
 
-    res.render('channel', { 
-        title: 'Channel: ' + req.params.channel,
-        active_index: true,
-        channel: req.params.channel,
-        arrayObject: arrayObject
-    });
-});
+    if (!req.params.date) {
+        res.render('channel', { 
+            title: 'Channel: ' + req.params.channel,
+            active_index: true,
+            channel: req.params.channel,
+            arrayObject: arrayObject
+        });
+    } else {
+        /* Read actual logfile to render */
 
-/* GET /c/:channel/:date . */
-router.get('/c/:channel/:date', function(req, res) {
-    /* Read actual logfile to render */
+        var array = fs.readFileSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/' + settings.network + '_#' + req.params.channel + '_' + req.params.date + '.log').toString().split("\n"),
+            messageObject = [];
 
-    var array = fs.readFileSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/' + settings.network + '_#' + req.params.channel + '_' + req.params.date + '.log').toString().split("\n"),
-        messageObject = [];
+        // For each line, push to messageObject
+        for(i in array) {
+            messageObject.push(array[i]);
+        }
 
-    // For each line, push to messageObject
-    for(i in array) {
-        messageObject.push(array[i]);
+        res.render('channel', { 
+            title: 'Channel: ' + req.params.channel + ' - ' + req.params.date,
+            active_index: true,
+            channel: req.params.channel,
+            date: req.params.date,
+            messages: messageObject,
+            arrayObject: arrayObject
+        });
     }
-
-    res.render('channel', { 
-        title: 'Channel: ' + req.params.channel + ' - ' + req.params.date,
-        active_index: true,
-        channel: req.params.channel,
-        date: req.params.date,
-        messages: messageObject
-    });
 });
 
 /*
