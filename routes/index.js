@@ -124,4 +124,55 @@ function uniquify(array){
     return(array);
 }
 
+// Function to update the logfiles
+function updateLogfiles(){
+    // Init channelObject element
+    var channelObject = {};
+
+    // Read all files in log file path
+    var files = fs.readdirSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/');
+
+    // For each log file
+    files.forEach(function(filename){
+        // Split filenames based on a pattern like <network>_<channel>_<date>
+        var splitPattern = '^' + settings.network + '_(.*)_([0-9]*).log$',
+            splitRegex = new RegExp(splitPattern, 'g'),
+            splitMatch = splitRegex.exec(filename);
+
+        // If we have a match, proceed to add to arrays
+        if (splitMatch) {
+            // Remove non-channels (queries) from channel list
+            var channelMatches = splitMatch[1].match(/^#.*$/);
+            if (channelMatches) {
+                // Remove hash character in front of channel name
+                var channelMatchResult = channelMatches[0].substring(1);
+
+                // If we didnt already initiated channelObject.test-channel initiate it
+                if (!channelObject[channelMatchResult]) {
+                    channelObject[channelMatchResult] = [];
+                } 
+
+                // Turn date into correct format for datepicker
+                var dateRegex = /^([0-9]{4})([0-9]{2})([0-9]{2})$/g,
+                    dateMatch = dateRegex.exec(splitMatch[2]);
+                if (dateMatch) {
+                    var possibleDate = dateMatch[1] + '-' + dateMatch[2] + '-' + dateMatch[3];
+                    // Push into channelObject.test-channel
+                    channelObject[channelMatchResult].push(possibleDate);
+                } 
+            }
+        } 
+    });
+
+    // Display total amount of channels
+    console.log('Found ' + Object.keys(channelObject).length + ' total channels...');
+
+    // Display amount of possible dates per channel
+    for (var channel in channelObject) {
+        console.log(channel + ': ' + channel.length + ' possible dates');
+    }
+
+    return channelObject;
+};
+
 module.exports = router;
