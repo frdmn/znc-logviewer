@@ -97,6 +97,25 @@ router.get('/channel/:channel', function(req, res) {
     });
 });
 
+
+/* GET /channel/:channel/:date . */
+router.get('/channel/:channel/:date', function(req, res) {
+    var array = fs.readFileSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/' + settings.network + '_#' + req.params.channel + '_' + req.params.date + '.log').toString().split("\n"),
+        messageObject = [];
+
+    for(i in array) {
+        messageObject.push(array[i]);
+    }
+
+    res.render('channel', { 
+        title: 'Channel: ' + req.param('channel') + ' - ' + req.param('date'),
+        active_index: true,
+        channel: req.params.channel,
+        date: req.params.date,
+        messages: messageObject
+    });
+});
+
 // Function to remove duplicate elements from array
 function uniquify(array){
     array = array.filter(function(elem, pos) {
