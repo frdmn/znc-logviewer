@@ -53,6 +53,14 @@ router.get('/', function(req, res) {
 router.get('/c/:channel', function(req, res) {
     /* Parse possible dates */
 
+    // Init temporary channel array
+    var channelArray = [];
+
+    // For each channel, push to array
+    for (var channel in channelObject) {
+        channelArray.push(channel);
+    }
+
     // Init temporary date array
     var dateArray = [];
 
@@ -66,6 +74,7 @@ router.get('/c/:channel', function(req, res) {
     arrayObject.network = settings.network;
     arrayObject.user = settings.user;
     arrayObject.channel = req.params.channel;
+    arrayObject.channelArray = channelArray;
     arrayObject.dateArray = dateArray;
 
     // Display found elements
