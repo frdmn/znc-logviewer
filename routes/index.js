@@ -20,8 +20,6 @@ setInterval(function(){
 router.get('/', function(req, res) {
     /* Parse informations from log file names */
 
-    console.log(channelObject);
-
     // Init temporary channel array
     var channelArray = [];
 
@@ -85,9 +83,12 @@ router.get('/channel/:channel', function(req, res) {
 
 /* GET /channel/:channel/:date . */
 router.get('/channel/:channel/:date', function(req, res) {
+    /* Read actual logfile to render */
+
     var array = fs.readFileSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/' + settings.network + '_#' + req.params.channel + '_' + req.params.date + '.log').toString().split("\n"),
         messageObject = [];
 
+    // For each line, push to messageObject
     for(i in array) {
         messageObject.push(array[i]);
     }
