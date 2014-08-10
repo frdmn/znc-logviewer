@@ -1,6 +1,6 @@
 var express = require('express'),
-    fs = require('fs');
-var router = express.Router();
+    fs = require('fs'),
+    router = express.Router();
 
 // Load settings file
 var settings = require('../settings.json');
@@ -15,6 +15,11 @@ setInterval(function(){
     channelObject = updateLogfiles();
 // Reloop every hour
 }, 1 * 60 * 60 * 1000);  
+
+ 
+/* 
+ * Routes
+ */
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -74,7 +79,6 @@ router.get('/channel/:channel', function(req, res) {
     });
 });
 
-
 /* GET /channel/:channel/:date . */
 router.get('/channel/:channel/:date', function(req, res) {
     /* Read actual logfile to render */
@@ -95,6 +99,10 @@ router.get('/channel/:channel/:date', function(req, res) {
         messages: messageObject
     });
 });
+
+/*
+ * Functions
+ */
 
 // Function to update the logfiles
 function updateLogfiles(){
