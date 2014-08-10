@@ -10,5 +10,10 @@ $(document).ready(function(){
             {{/each}}
         ])
     });
+
+    // Some action when date is selected
+    rome(input).on('data', function (value) {
+        console.log($(input).attr('data-channel'), value);
+    });
 });
 </script>
