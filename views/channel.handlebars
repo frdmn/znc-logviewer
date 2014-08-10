@@ -1,7 +1,8 @@
-<h1>#{{{channel}}}<small> - {{{date}}}</small></h1>
+<h1>#{{{channel}}}<small>{{#if date}} - {{{date}}}</small>{{/if}}</h1>
 
 {{#each messages}}
     <code>
         {{this}}
     </code><br>
 {{/each}}
+{{> datepicker}}
