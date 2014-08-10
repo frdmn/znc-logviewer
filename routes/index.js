@@ -91,7 +91,7 @@ router.get('/channel/:channel', function(req, res) {
     // Display found elements
     console.log('Found ' + dateArray.length + ' possible dates');
 
-    res.render('channel', { 
+    res.render('dateselect', { 
         title: 'Channel: ' + req.param('channel'),
         active_index: true,
         channel: req.params.channel,
