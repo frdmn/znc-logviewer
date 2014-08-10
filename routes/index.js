@@ -26,7 +26,7 @@ router.get('/', function(req, res) {
     /* Parse informations from log file names */
 
     // Init temporary channel array
-    var channelArray = [];
+    var channelArray = constructChannelArray(channelObject, null);
 
     // For each channel, push to array
     for (var channel in channelObject) {
@@ -53,13 +53,7 @@ router.get('/', function(req, res) {
 router.get('/c/:channel/:date?', function(req, res) {
     /* Parse possible dates */
 
-    // Init temporary channel array
-    var channelArray = [];
-
-    // For each channel, push to array
-    for (var channel in channelObject) {
-        channelArray.push(channel);
-    }
+    var channelArray = constructChannelArray(channelObject, req.params.channel);
 
     // Init temporary date array
     var dateArray = [];
@@ -112,6 +106,31 @@ router.get('/c/:channel/:date?', function(req, res) {
 /*
  * Functions
  */
+
+// Function to construct channelArray
+function constructChannelArray(channelObject, activeChannel){
+    // Init temporary channel array
+    var channelArray = [];
+
+    // For each channel, push to array
+    for (var channel in channelObject) {
+        // Init object that stores the channel and a boolean if the channel is the current active one
+        var channelElement = {};
+
+        channelElement.channelName = channel;
+
+        if (channel == activeChannel) {
+            channelElement.channelActive = true;
+        } else {
+            channelElement.channelActive = false;
+        }
+
+        // Push to channelArray
+        channelArray.push(channelElement);
+    }
+
+    return channelArray;
+}
 
 // Function to update the logfiles
 function updateLogfiles(){
