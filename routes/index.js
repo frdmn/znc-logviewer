@@ -4,33 +4,33 @@ var router = express.Router();
 
 // Load settings file
 var settings = require('../settings.json');
-    
+
+var channelObject = {};
+
+// Call function to store channels and possible dates in object
+channelObject = updateLogfiles();
+
+// Timer to update the function above in runtime
+setInterval(function(){
+    channelObject = updateLogfiles();
+// Reloop every hour
+}, 1 * 60 * 60 * 1000);  
+
 /* GET home page. */
 router.get('/', function(req, res) {
     /* Parse informations from log file names */
 
-    // Init element array
+    console.log(channelObject);
+
+    // Init temporary channel array
     var channelArray = [];
-    
-    var files = fs.readdirSync(settings.zncpath + '/users/' + settings.user + '/moddata/log/');
 
-    files.forEach(function(filename){
-        // Split filenames based on a pattern like <network>_<channel>_<date>
-        var splitPattern = '^' + settings.network + '_(.*)_[0-9]*.log$',
-            splitRegex = new RegExp(splitPattern, 'g'),
-            splitMatch = splitRegex.exec(filename);
+    // For each channel, push to array
+    for (var channel in channelObject) {
+        channelArray.push(channel);
+    }
 
-        // If we have a match, proceed to add to arrays
-        if (splitMatch) {
-            // Remove non-channels (queries) from channel list
-            var channelMatches = splitMatch[1].match(/^#.*$/);
-            if (channelMatches) {
-                channelArray.push(channelMatches[0].substring(1));
-            }
-        } 
-    });
-
-    // Make arrays unique
+    // Make array unique
     channelArray = uniquify(channelArray);
 
     // Create object which gets passed to the template
