@@ -1,6 +1,6 @@
 <select>
     {{#each arrayObject.channelArray}}
-        <option value="{{this}}">#{{this}}</option>
+        <option value="{{channelName}}" {{#if channelActive}}selected{{/if}}>#{{channelName}}</option>
     {{/each}}
 </select>
 <script>
