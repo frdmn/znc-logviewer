@@ -1,4 +1,5 @@
 <select>
+    <option>Select channel:</option>
     {{#each arrayObject.channelArray}}
         <option value="{{channelName}}" {{#if channelActive}}selected{{/if}}>#{{channelName}}</option>
     {{/each}}
@@ -6,8 +7,8 @@
 <script>
 $(document).ready(function(){
     $("select").change(function(){
-        var channel = $(this).val(); 
+        var channel = $(this).val();
         window.location = '/c/' + channel;
-    });    
+    });
 });
 </script>
