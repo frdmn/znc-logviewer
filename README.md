@@ -7,9 +7,9 @@ The project is a work in progress!
 
 ### Requirements
 
-* Installed `npm` and `grunt`:   
+* Installed `npm` and `grunt`:
   `npm install -g grunt-cli`
-* Installed `sass` ruby gem:  
+* Installed `ruby` and `gem` to install the `sass` gem:  
   `gem install sass`
 * Enabled global ZNC logs (`${ZNCUSERHOME}/.znc/moddata/log/`)
 
