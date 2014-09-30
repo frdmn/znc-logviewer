@@ -1,13 +1,16 @@
 znc-logviewer
 =============
 
-Node based web interface to browse through ZNC log files. 
+Node based web interface to browse through ZNC log files.
 
 The project is a work in progress!
 
 ### Requirements
 
-* Installed `npm` and `grunt`: `npm install -g grunt-cli` 
+* Installed `npm` and `grunt`:   
+  `npm install -g grunt-cli`
+* Installed `sass` ruby gem:  
+  `gem install sass`
 * Enabled global ZNC logs (`${ZNCUSERHOME}/.znc/moddata/log/`)
 
 ### Installation
