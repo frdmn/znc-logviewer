@@ -7,11 +7,11 @@ The project is a work in progress!
 
 ### Requirements
 
-* Installed `npm` and `grunt`:  
-  `npm install -g grunt-cli`
-* Installed `ruby` and `gem` to install the `sass` gem:  
-  `gem install sass`
-* Enabled global ZNC logs (`${ZNCUSERHOME}/.znc/moddata/log/`)
+* NodeJS (`npm`)
+* Bower
+* Grunt
+* Ruby (`gem`)
+* global ZNC logs (`${ZNCUSERHOME}/.znc/moddata/log/`)
 
 ### Installation
 
@@ -21,7 +21,10 @@ The project is a work in progress!
   `cp settings-example.json	settings.json`  
 3. Adjust the users and the log file path in the configuration file:  
   `editor settings.json`
-4. Install all dependencies:  
+4. Install dependencies:  
+  `npm install -g grunt-cli`  
+  `gem install sass`  
+4. Install all packages:  
   `npm install`
 5. Install web libraries:  
   `bower install`
@@ -32,9 +35,8 @@ The project is a work in progress!
 
 ### Dependencies
 
-* NodeJS (`npm`)
-* Bower
 * Grunt
+* Sass
 
 ## Version
 
