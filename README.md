@@ -8,8 +8,6 @@ The project is a work in progress!
 ### Requirements
 
 * NodeJS (`npm`)
-* Bower
-* Grunt
 * Ruby (`gem`)
 * global ZNC logs (`${ZNCUSERHOME}/.znc/moddata/log/`)
 
@@ -35,6 +33,7 @@ The project is a work in progress!
 
 ### Dependencies
 
+* Bower
 * Grunt
 * Sass
 
