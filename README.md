@@ -16,7 +16,7 @@ The project is a work in progress!
 ### Installation
 
 1. Clone the repository:  
-  `git clone https://github.com/frdmn/Live.app`
+  `git clone https://github.com/frdmn/znc-logviewer`
 2. Duplicate and rename the example settings file:  
   `cp settings-example.json	settings.json`  
 3. Adjust the users and the log file path in the configuration file:  
